@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.bos.dao.base.StandardRepository;
+import cn.itcast.bos.domain.base.Courier;
 import cn.itcast.bos.domain.base.Standard;
 import cn.itcast.bos.service.base.StandardService;
 
@@ -28,6 +29,12 @@ public class StandardServiceImpl implements StandardService {
 	@Override
 	public Page<Standard> findPageData(Pageable pageable) {
 		return standardRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Standard> findAllStandard() {
+		
+		return standardRepository.findAll();
 	}
 
 

@@ -5,6 +5,7 @@
 		<groupId>cn.itcast.maven</groupId>
 		<artifactId>common_parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../common_parent</relativePath>
 	</parent>
 	<artifactId>bos_management</artifactId>
 	<packaging>war</packaging>

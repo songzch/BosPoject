@@ -1,6 +1,7 @@
 package cn.itcast.bos.web.action.base;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -77,5 +78,18 @@ public class StandardAction extends ActionSupport implements
 
 		return SUCCESS;
 	}
+	
+	
+	@Action(value="standard_findAll" ,results={@Result(name="success",type="json")})
+	public String findAll(){
+		
+		List<Standard> list = standardService.findAllStandard();
+		
+		ActionContext.getContext().getValueStack().push(list);
+		
+		return SUCCESS;
+		
+	}
+	
 
 }

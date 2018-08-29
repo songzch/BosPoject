@@ -11,8 +11,8 @@ import cn.itcast.bos.domain.base.Standard;
 public interface StandardRepository extends JpaRepository<Standard, Integer> {
 	
 	// 根据收派标准名称查询 
-	/*public List<Standard> findByName(String name);
-	
+	//public List<Standard> findByName(String name);
+/*	
 	@Query(value="from Standard where name = ?" ,nativeQuery=false)
 	// nativeQuery 为 false 配置JPQL 、 为true 配置SQL 
 	public List<Standard> queryName(String name);
