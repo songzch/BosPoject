@@ -26,7 +26,7 @@
 			var i = 0;
             $(array).each(function(){  
             	// array[i++]
-            	alert("数组元素="+ JSON.stringify(this)+"     参数名="+this.name+" 参数值="+this.value);
+            	//alert("数组元素="+ JSON.stringify(this)+"     参数名="+this.name+" 参数值="+this.value);
                 if(serializeObj[this.name]){  
                 	alert("进来没...");
                     if($.isArray(serializeObj[this.name])){  
@@ -36,7 +36,7 @@
                     }  
                 }else{  
                     serializeObj[this.name]=this.value;  
-                    alert("每个参数值="+serializeObj[this.name]);
+                    //alert("每个参数值="+serializeObj[this.name]);
                 }  
             });  
             return serializeObj;  
@@ -62,7 +62,7 @@
 						$("input[name='standard.id']").val(row.standard.id); //传值需要用到
 						// 显示窗口
 						$("#addWindow").window('open');
-						alert(row.standard.name);
+						//alert(row.standard.name);
 					}
 			}
 			
