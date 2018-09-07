@@ -82,13 +82,9 @@ public class StandardAction extends ActionSupport implements
 	
 	@Action(value="standard_findAll" ,results={@Result(name="success",type="json")})
 	public String findAll(){
-		
 		List<Standard> list = standardService.findAllStandard();
-		
 		ActionContext.getContext().getValueStack().push(list);
-		
 		return SUCCESS;
-		
 	}
 	
 
