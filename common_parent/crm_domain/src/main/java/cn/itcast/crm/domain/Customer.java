@@ -50,6 +50,7 @@ public class Customer {
 	private String email; // 邮箱
 	@Column(name = "C_Fixed_AREA_ID")
 	private String fixedAreaId; // 定区编码
+	
 
 	public Integer getId() {
 		return id;
@@ -173,5 +174,7 @@ public class Customer {
 				+ mobilePhone + ", email=" + email + ", fixedAreaId="
 				+ fixedAreaId + "]";
 	}
+	
+
 
 }
