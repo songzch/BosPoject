@@ -30,7 +30,7 @@
 	</filter-mapping>
 	 -->
 
-	<!-- <servlet>
+	<servlet>
 		<servlet-name>CXFService</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
@@ -38,18 +38,18 @@
 	<servlet-mapping>
 		<servlet-name>CXFService</servlet-name>
 		<url-pattern>/services/*</url-pattern>
-	</servlet-mapping> -->
+	</servlet-mapping>
 
  
-	<filter>
-		<filter-name>OpenEntityManagerInView</filter-name>
+	<!--<filter>
+ 		<filter-name>OpenEntityManagerInView</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
 		<filter-name>OpenEntityManagerInView</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 	
 
 	<!-- shiro的Filter -->
@@ -64,15 +64,15 @@
 	</filter-mapping> -->
 
 	<!-- struts2 过滤器 -->
-	<filter>
+<!-- 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>   <!-- *.action Struts2不去拦截WebService的发布 -->
-	</filter-mapping>
+		<url-pattern>/*</url-pattern>   *.action Struts2不去拦截WebService的发布
+	</filter-mapping> -->
 
 
 	<welcome-file-list>
