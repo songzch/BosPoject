@@ -130,11 +130,4 @@ public class AreaAction extends BaseAction<Area>{
         pushPageDataToValueStack(page);
 		return SUCCESS;
 	}
-	
-	
-
-
-	
-	
-
 }

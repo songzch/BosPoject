@@ -1,5 +1,7 @@
 package cn.itcast.bos.service.base;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,6 +23,6 @@ public interface CourierService {
 	public Page<Courier> findPageData(PageRequest pageable,Specification specification);
 	
 	public void delCourier(String[] array);
-		
 
+	public List<Courier> NoAssociationCouriers();
 }

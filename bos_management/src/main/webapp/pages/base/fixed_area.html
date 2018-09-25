@@ -59,10 +59,10 @@
 					$("#customerFixedAreaId").val(rows[0].id);
 					
 					// 显示进度条
-					$.messager.progress({
+					/*$.messager.progress({
 						interval :500 // 每0.5秒加载10%, 5秒加载完
 					});
-					
+					*/
 					// 发起Ajax请求    
 					$.post("../../fixedArea_findNoAssociationCustomers.action", function(data){ //
 						// 清空列表
@@ -73,11 +73,8 @@
 							var option = $("<option value='"+this.id+"'>"+this.username+"("+this.address+")</option>");
 							$("#noassociationSelect").append(option);
 						});
-						
 						// 请求结束后，关闭进度条
-						$.messager.progress('close');
-						// 弹出关联窗口 
-						$('#customerWindow').window('open');
+						//$.messager.progress('close');
 					});
 					
 					$.post("../../fixedArea_findHasAssociationFixedAreaCustomers.action",{"id":rows[0].id} , function(data){
@@ -89,7 +86,8 @@
 							$("#associationSelect").append(option);
 						});
 					});
-					
+					// 弹出关联窗口 
+					$('#customerWindow').window('open');					
 				}else{
 					// 没有选 或者 选了多个定区 
 					$.messager.alert('警告','定区关联客户必须（只能）选择一个定区','warning');
@@ -437,7 +435,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- 添加 修改定区 -->
 		<div class="easyui-window" title="定区添加修改" id="addWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 			<div style="height:31px;overflow:hidden;" split="false" border="false">
@@ -520,7 +517,6 @@
 				</form>
 			</div>
 		</div>
-
 		<!-- 关联客户窗口 -->
 		<div class="easyui-window" title="关联客户窗口" id="customerWindow" modal="true"
 			collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 700px;height: 300px;">

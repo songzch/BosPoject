@@ -2,10 +2,18 @@ package cn.itcast.bos.service.base.impl;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.apache.struts2.components.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +61,19 @@ public class CourierServiceImpl implements CourierService {
 			courierRepository.delCourier(id);
 		}
 
+	}
+
+	@Override
+	public List<Courier> NoAssociationCouriers() {
+		Specification<Courier> specification = new Specification<Courier>() {
+			@Override
+			public Predicate toPredicate(Root<Courier> root, CriteriaQuery<?> query,
+					CriteriaBuilder cb) {
+				Predicate p = cb.isEmpty(root.get("fixedAreas"));
+				return p;
+			}
+		};
+		return courierRepository.findAll(specification);
 	}
 	
 

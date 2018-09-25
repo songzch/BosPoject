@@ -1,13 +1,17 @@
 package cn.itcast.bos.web.action.base;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -19,9 +23,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+import cn.itcast.bos.domain.base.Courier;
 import cn.itcast.bos.domain.base.FixedArea;
+import cn.itcast.bos.service.base.CourierService;
 import cn.itcast.bos.service.base.FixedAreaService;
 import cn.itcast.bos.web.action.common.BaseAction;
+import cn.itcast.crm.domain.Customer;
 
 /** 
 * @author  songzch 
@@ -38,10 +48,20 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	@Autowired
 	private FixedAreaService fixedAreaService;
 	
+	
+	@Autowired
+	private CourierService courierService;
+	
+	private String id;
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/*
 	 * 实现定区的保存功能
 	 */
-	@Action(value="fixedArea_save",results={@Result(name="success",location="./pages/base/fixed_area.html")})
+	@Action(value="fixedArea_save",results={@Result(name="success",location="./pages/base/fixed_area.html",type="redirect")})
 	public String save(){
 		fixedAreaService.save(model);
 		return SUCCESS;
@@ -72,6 +92,61 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		Page<FixedArea> findPageData = fixedAreaService.findPageData(specification, pageRequest);
 		pushPageDataToValueStack(findPageData);
 		return SUCCESS;
+	}
+	
+	
+	@Action(value = "fixedArea_findNoAssociationCustomers", results = { @Result(name = "success", type = "json") })
+	public String findNoAssociationCustomers() {
+		System.out.println("查找所有的用户");
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/noAssociationCustomers")
+				.accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
+		
+		ActionContext.getContext().getValueStack().push(collection);
+
+		return SUCCESS;
+	}
+	              
+	@Action(value="fixedArea_findHasAssociationFixedAreaCustomers",results={@Result(name="success",type="json")})
+	public String  findHasAssociationFixedAreaCustomers(){
+		System.out.println("查找未关联的客户");
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/associationfixedareaCustomers/"+model.getId())
+				.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).getCollection(Customer.class);
+		ActionContext.getContext().getValueStack().push(collection);
+		return SUCCESS;
+	}
+	
+	
+	private String[] customerIds;
+
+	public void setCustomerIds(String[] customerIds) {
+		this.customerIds = customerIds;
+	}
+	
+	/*
+	 * 实现客户的与定区的关联
+	 */
+	@Action(value="fixedArea_associationCustomersToFixedArea",results={@Result(name="success",type="redirect",location="./pages/base/fixed_area.html")})
+	public String associationCustomersToFixedArea() {
+		//将客户的id值拼接,生成字符串，进行传递。
+		String customerStrId = StringUtils.join(customerIds, ",");
+		
+		WebClient
+				.create("http://localhost:8082/crm_management/services/customerService/associationcustomerstofixedarea?customerIdStr="
+						+ customerStrId + "&fixedAreaId=" + model.getId())
+				.put(null);
+
+		return SUCCESS;
+	}
+	
+	
+	@Action(value="courier_findnoassociation",results={@Result(name="success",type="json",location="./pages/base/fixed_area.html")})
+	public String findNoAssociationCouriers(){
+		
+		List<Courier> list = courierService.NoAssociationCouriers();
+		
+		ActionContext.getContext().getValueStack().push(list);
+		
+		return SUCCESS;	
 	}
 	
 	
