@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -28,8 +29,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import cn.itcast.bos.domain.base.Courier;
 import cn.itcast.bos.domain.base.FixedArea;
+import cn.itcast.bos.domain.base.TakeTime;
 import cn.itcast.bos.service.base.CourierService;
 import cn.itcast.bos.service.base.FixedAreaService;
+import cn.itcast.bos.service.base.TakeTimeService;
 import cn.itcast.bos.web.action.common.BaseAction;
 import cn.itcast.crm.domain.Customer;
 
@@ -45,18 +48,14 @@ import cn.itcast.crm.domain.Customer;
 @Namespace("/")
 public class FixedAreaAction extends BaseAction<FixedArea> {
 	
+	private final Logger log= Logger.getLogger(FixedAreaAction.class);
+	
 	@Autowired
 	private FixedAreaService fixedAreaService;
-	
 	
 	@Autowired
 	private CourierService courierService;
 	
-	private String id;
-	
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	/*
 	 * 实现定区的保存功能
@@ -97,7 +96,6 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	
 	@Action(value = "fixedArea_findNoAssociationCustomers", results = { @Result(name = "success", type = "json") })
 	public String findNoAssociationCustomers() {
-		System.out.println("查找所有的用户");
 		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/noAssociationCustomers")
 				.accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		
@@ -108,7 +106,6 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	              
 	@Action(value="fixedArea_findHasAssociationFixedAreaCustomers",results={@Result(name="success",type="json")})
 	public String  findHasAssociationFixedAreaCustomers(){
-		System.out.println("查找未关联的客户");
 		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/associationfixedareaCustomers/"+model.getId())
 				.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
@@ -137,17 +134,48 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 
 		return SUCCESS;
 	}
-	
-	
-	@Action(value="courier_findnoassociation",results={@Result(name="success",type="json",location="./pages/base/fixed_area.html")})
+	@Action(value="courier_findnoassociation",results={@Result(name="success",type="json")})
 	public String findNoAssociationCouriers(){
-		
 		List<Courier> list = courierService.NoAssociationCouriers();
-		
 		ActionContext.getContext().getValueStack().push(list);
-		
 		return SUCCESS;	
 	}
+	
+	@Autowired
+	private TakeTimeService takeTimeService;
+	
+	@Action(value="taketime_findAll",results={@Result(name="success",type="json")})
+	public String findTakeTime(){
+		List<TakeTime> list = takeTimeService.findAll();
+		ActionContext.getContext().getValueStack().push(list);
+		return SUCCESS;	
+	}
+	
+	private Integer courierId;
+	
+	private Integer takeTimeId;
+	
+	public void setCourierId(Integer courierId) {
+		this.courierId = courierId;
+	}
+
+	public void setTakeTimeId(Integer takeTimeId) {
+		this.takeTimeId = takeTimeId;
+	}
+    
+	
+	@Action(value="fixedArea_associationCourierToFixedArea",results={@Result(name="success",type="redirect",location="./pages/base/fixed_area.html")})
+	public String associationCourierToFixedArea(){
+		fixedAreaService.associationCourierToFixedArea(model.getId(),courierId,takeTimeId);
+
+		return SUCCESS;	
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -25,4 +25,6 @@ public interface CourierService {
 	public void delCourier(String[] array);
 
 	public List<Courier> NoAssociationCouriers();
+	
+	public Courier findOne(Integer id);
 }

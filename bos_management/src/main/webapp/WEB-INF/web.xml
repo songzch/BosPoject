@@ -14,6 +14,15 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value> /WEB-INF/classes/log4j.properties </param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value> 600000 </param-value>
+	</context-param>
+
 	<!-- 解决控制台webservice Encoding:ISO-8859-1 -->
 	<!-- 
 	<filter>

@@ -75,6 +75,11 @@ public class CourierServiceImpl implements CourierService {
 		};
 		return courierRepository.findAll(specification);
 	}
+
+	@Override
+	public Courier findOne(Integer id) {
+		return courierRepository.findOne(id);
+	}
 	
 
 }

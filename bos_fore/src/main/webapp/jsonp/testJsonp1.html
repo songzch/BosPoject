@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jsonp一之最简单的js方法调用</title>
+		
+		<script type="text/javascript">
+			function localHandler(data) {
+				alert("数据="+data.result);
+			}
+			
+			window.onload = function() {
+				localHandler({"result":"一点数据"});
+			}
+		</script>
+
+	</head>
+
+	<body>
+	</body>
+
+</html>

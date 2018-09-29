@@ -20,5 +20,10 @@ public interface FixedAreaService {
 	
 	public Page<FixedArea> findPageData(Specification<FixedArea> sp,PageRequest pageable);
 	
+	public FixedArea findOne(String id);
+
+
+	public void associationCourierToFixedArea(String id, Integer courierId, Integer takeTimeId);
+	
 
 }

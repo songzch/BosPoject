@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jsonp二之静态引用script标签加载远程js文件</title>
+		
+		<script type="text/javascript">
+			function localHandler(data) {
+				alert("数据="+data.result);
+			}
+		</script>
+		
+		<!-- <script type="text/javascript" src="http://localhost:9001/bos_management/remote.js"></script> -->
+
+		<script type="text/javascript" src="http://localhost:9001/bos_management/testJsonp.action?callback=localHandler"></script>
+
+	</head>
+
+	<body>
+	</body>
+
+</html>
