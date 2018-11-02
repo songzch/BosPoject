@@ -24,6 +24,5 @@ public interface CourierRepository extends JpaRepository<Courier, Integer>,JpaSp
 	
 	
 	
-	
 
 }

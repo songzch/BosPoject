@@ -31,7 +31,6 @@ public class AreaServiceImple implements AreaService {
 		areaRepository.save(list);
 		
 	}
-
 	@Override
 	public Page<Area> findAll(PageRequest pageable, Specification<Area> specification) {
 		Page<Area> findAll = areaRepository.findAll(specification, pageable);

@@ -13,4 +13,5 @@ import cn.itcast.bos.domain.base.Area;
 */
 public interface AreaRepository extends JpaRepository<Area, String>,JpaSpecificationExecutor<Area> {
 
+	
 }

@@ -15,7 +15,6 @@ import cn.itcast.bos.domain.base.Area;
 * @return  
 */
 public interface AreaService {
-
 	public void save(ArrayList<Area> list);
 
 	public Page<Area> findAll(PageRequest pageable, Specification<Area> specification);

@@ -14,7 +14,6 @@ import cn.itcast.bos.domain.base.FixedArea;
 */
 public interface FixedAreaService {
 	
-	
 	public void save(FixedArea model);
 	
 	

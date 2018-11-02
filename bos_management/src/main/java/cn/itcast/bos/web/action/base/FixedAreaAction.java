@@ -49,7 +49,7 @@ import cn.itcast.crm.domain.Customer;
 public class FixedAreaAction extends BaseAction<FixedArea> {
 	
 	private final Logger log= Logger.getLogger(FixedAreaAction.class);
-	
+
 	@Autowired
 	private FixedAreaService fixedAreaService;
 	
@@ -96,7 +96,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	
 	@Action(value = "fixedArea_findNoAssociationCustomers", results = { @Result(name = "success", type = "json") })
 	public String findNoAssociationCustomers() {
-		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/noAssociationCustomers")
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/services/customerService/noAssociationCustomers")
 				.accept(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		
 		ActionContext.getContext().getValueStack().push(collection);
@@ -106,7 +106,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	              
 	@Action(value="fixedArea_findHasAssociationFixedAreaCustomers",results={@Result(name="success",type="json")})
 	public String  findHasAssociationFixedAreaCustomers(){
-		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/crm_management/services/customerService/associationfixedareaCustomers/"+model.getId())
+		Collection<? extends Customer> collection = WebClient.create("http://localhost:8082/services/customerService/associationfixedareaCustomers/"+model.getId())
 				.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).getCollection(Customer.class);
 		ActionContext.getContext().getValueStack().push(collection);
 		return SUCCESS;
@@ -128,7 +128,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 		String customerStrId = StringUtils.join(customerIds, ",");
 		
 		WebClient
-				.create("http://localhost:8082/crm_management/services/customerService/associationcustomerstofixedarea?customerIdStr="
+				.create("http://localhost:8082/services/customerService/associationcustomerstofixedarea?customerIdStr="
 						+ customerStrId + "&fixedAreaId=" + model.getId())
 				.put(null);
 

@@ -20,7 +20,7 @@
 	<!-- 加载properties文件 -->
 	<context:property-placeholder location="classpath:config.properties"  ignore-unresolvable="true"/>
 	
-	<!-- 加载slf4j文件 -->
+	<!-- 加载log4j文件 -->
 	<context:property-placeholder location="classpath:log4j.properties" ignore-unresolvable="true"/>
 	
 	<!-- 引入外部数据文件 -->

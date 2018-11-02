@@ -15,7 +15,7 @@ import cn.itcast.bos.domain.base.Courier;
 * @return  
 */
 public interface CourierService {
-
+	
 	public void save(Courier courier);
 
 	public Page<Courier> findAll(PageRequest pageable);

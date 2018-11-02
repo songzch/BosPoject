@@ -11,7 +11,6 @@ import cn.itcast.bos.domain.base.TakeTime;
 * @return  
 */
 public interface TakeTimeService {
-	
   public List<TakeTime> findAll();
   
   public TakeTime findOne(Integer id);

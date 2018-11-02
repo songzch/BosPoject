@@ -67,22 +67,19 @@ public class StandardAction extends ActionSupport implements
 		// 调用业务层 ，查询数据结果
 		Pageable pageable = new PageRequest(page - 1, rows);
 		Page<Standard> pageData = standardService.findPageData(pageable);
-
 		// 返回客户端数据 需要 total 和 rows
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("total", pageData.getTotalElements());
 		result.put("rows", pageData.getContent());
-
 		// 将map转换为json数据返回 ，使用struts2-json-plugin 插件
 		ActionContext.getContext().getValueStack().push(result);
-
 		return SUCCESS;
 	}
 	
 	
 	@Action(value="standard_findAll" ,results={@Result(name="success",type="json")})
 	public String findAll(){
-		List<Standard> list = standardService.findAllStandard();
+		List<Standard> list = standardService.findAll();
 		ActionContext.getContext().getValueStack().push(list);
 		return SUCCESS;
 	}

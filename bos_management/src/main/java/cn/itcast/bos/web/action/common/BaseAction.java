@@ -19,7 +19,7 @@ import com.opensymphony.xwork2.ActionContext;
 * @return  
 */
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
-
+	
 	protected T model;
 
 	public T getModel() {

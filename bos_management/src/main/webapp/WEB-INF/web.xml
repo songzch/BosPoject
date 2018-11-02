@@ -14,14 +14,14 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<context-param>
+<!-- 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value> /WEB-INF/classes/log4j.properties </param-value>
+		<param-value>classpath:log4j.properties </param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
 		<param-value> 600000 </param-value>
-	</context-param>
+	</context-param> -->
 
 	<!-- 解决控制台webservice Encoding:ISO-8859-1 -->
 	<!-- 
@@ -77,13 +77,10 @@
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
-
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>   <!-- *.action Struts2不去拦截WebService的发布 -->
 	</filter-mapping>
-
-
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
