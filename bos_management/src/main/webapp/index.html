@@ -31,7 +31,7 @@
 				};
 				
 				// 基本功能菜单加载
-				$.post("./menu_showmenu.action",function(data){
+				$.post("./data/menu.json",function(data){
 					$.fn.zTree.init($("#treeMenu"), setting, data);
 				},"json");
 				
@@ -213,7 +213,7 @@
 					<tr>
 						<td style="width: 300px;">
 							<div style="color: #999; font-size: 8pt;">
-								传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
+								中国联通 | Powered by <a href="http://www.baidu.cn/">baidu</a>
 							</div>
 						</td>
 						<td style="width: *;" class="co1"><span id="online" style="background: url(./images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:1</span>

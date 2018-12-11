@@ -12,6 +12,9 @@ import cn.itcast.bos.domain.base.Area;
 * @return  
 */
 public interface AreaRepository extends JpaRepository<Area, String>,JpaSpecificationExecutor<Area> {
-
+    
+	
+	public Area findAreaByProvinceAndCityAndDistrict(String province,String city,String district);
+	
 	
 }

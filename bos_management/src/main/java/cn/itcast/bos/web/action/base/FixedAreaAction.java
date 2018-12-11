@@ -134,6 +134,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 
 		return SUCCESS;
 	}
+	
 	@Action(value="courier_findnoassociation",results={@Result(name="success",type="json")})
 	public String findNoAssociationCouriers(){
 		List<Courier> list = courierService.NoAssociationCouriers();
@@ -167,7 +168,7 @@ public class FixedAreaAction extends BaseAction<FixedArea> {
 	@Action(value="fixedArea_associationCourierToFixedArea",results={@Result(name="success",type="redirect",location="./pages/base/fixed_area.html")})
 	public String associationCourierToFixedArea(){
 		fixedAreaService.associationCourierToFixedArea(model.getId(),courierId,takeTimeId);
-
+		
 		return SUCCESS;	
 	}
 	
