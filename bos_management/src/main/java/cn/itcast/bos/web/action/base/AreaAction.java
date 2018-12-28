@@ -48,7 +48,7 @@ import cn.itcast.bos.web.action.common.BaseAction;
 @Controller
 public class AreaAction extends BaseAction<Area>{
 	
-	
+	//测试文件
 	private File file2;
 	
 	public void setFile2(File file2) {
